@@ -1,19 +1,22 @@
 #define TRIG1 3  //  1번 초음파 센서 Trig 핀 번호
 #define ECHO1 4  //  1번 초음파 센서 Echo 핀 번호
 
-#define TRIG2 5  //  1번 초음파 센서 Trig 핀 번호
-#define ECHO2 6  //  1번 초음파 센서 Echo 핀 번호
+#define TRIG2 5  //  2번 초음파 센서 Trig 핀 번호
+#define ECHO2 6  //  2번 초음파 센서 Echo 핀 번호
 
-#define TRIG3 7  //  1번 초음파 센서 Trig 핀 번호
-#define ECHO3 8  //  1번 초음파 센서 Echo 핀 번호
+#define TRIG3 7  //  3번 초음파 센서 Trig 핀 번호
+#define ECHO3 8  //  3번 초음파 센서 Echo 핀 번호
 
 void setup() {
   pinMode(TRIG1, OUTPUT);
   pinMode(ECHO1, INPUT);
+  
   pinMode(TRIG2, OUTPUT);
   pinMode(ECHO2, INPUT);
+  
   pinMode(TRIG3, OUTPUT);
   pinMode(ECHO3, INPUT);
+  
   Serial.begin(115200); // 통신 속도를 115200으로 정의
 }
 
@@ -54,11 +57,11 @@ long sonar3(void) {
 void loop() {
   //Serial.print("Duration: ");
   //Serial.println(sonar1());
-  Serial.print("Distance: ");
+  Serial.print("Distance1: ");
   Serial.println(sonar1());
-  Serial.print("Distance: ");
+  Serial.print("Distance2: ");
   Serial.println(sonar2());
-  Serial.print("Distance: ");
+  Serial.print("Distance3: ");
   Serial.println(sonar3());
   //Serial.println("mm\n");
   delay(500);
