@@ -36,7 +36,6 @@ void Excersize_2_19(int solution, int answer)
 	{
 		printf("\n\n\n");
 		printf("=================================================================\n");
-		// your code here
 		printf("(a) 문제를 풀기 위해서는 혼합된 단위의 가속도를 정리해야 합니다. \n");
 		printf("km/h/s를 m/s로 변환합니다.\n\n");
 
