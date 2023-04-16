@@ -49,7 +49,8 @@ void Excersize_2_19(int solution, int answer)
 
 		printf("과속 운전자가 붙잡히는 순간은 두 자동차의 거리가 같을 때입니다.\n");
 		printf("%.1lf m/s = 1/2 * %.2lf m/s^2 * t^2\n\n", velocity / 3.6, converted_acceleration, acceleration / 3.6);
-
+		
+		printf("두 식의 이차방정식 : t^2 + %.2lft - %.1lf = 0\n", converted_acceleration, velocity / 3.6);
 		printf("이차방정식의 해를 구하면 x1 = %.lf s, x2 = %.lf s입니다.\n", (-b + e) / (2.0 * a), (-b - e) / (2.0 * a));
 		printf("이때 처음 달리기 시작한 시간인 0 s는 답이 될 수 없습니다.\n\n ");
 		printf("=================================================================\n");
