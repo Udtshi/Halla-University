@@ -17,7 +17,7 @@ void Excersize_2_25(int solution, int answer)
 	double velocity = 5.50;
 	double height = 100;
 	double gravity_accel = 9.80;
-	double time = 0;
+	double time = 0.0;
 
 	double a, b, c = 0, d, e = 0.0;
 
