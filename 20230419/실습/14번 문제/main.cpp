@@ -6,7 +6,7 @@ int i;
 int num;
 
 int main(void){
-	printf("¸î¹øÂ° Ç×±îÁö ±¸ÇÒ±î¿ä? ");
+	printf("ëª‡ë²ˆì§¸ í•­ê¹Œì§€ êµ¬í• ê¹Œìš”? ");
 	scanf("%d", &num);
 
 	printf("%d, ", a);
