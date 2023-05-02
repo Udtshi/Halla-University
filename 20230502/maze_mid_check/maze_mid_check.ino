@@ -2,9 +2,9 @@
 #include <NewPing.h>
 
 #define SONAR_NUM 3      // Number of sensors.
-#define MAX_DISTANCE 150 // Maximum distance (in cm) to ping.
-#define WALL_GAP_DISTANCE 400 // mm
-#define WALL_GAP_DISTANCE_HALF 200 // mm
+#define MAX_DISTANCE 300 // Maximum distance (in cm) to ping.
+#define WALL_GAP_DISTANCE 500 // mm
+#define WALL_GAP_DISTANCE_HALF 250 // mm
 #define MOTOR_PWM_OFFSET 10
 #define MOTOR_SPEED 80
 
@@ -85,19 +85,19 @@ void motor_B_control(int direction_b, int motor_speed_b) {  //모터 B의 방향
 }
 
 void check_maze_status(void) {
-  if ((left_sonar >= 0) && (left_sonar <= WALL_GAP_DISTANCE_HALF) && (right_sonar >= 0) && (right_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= 0) && (front_sonar <= WALL_GAP_DISTANCE_HALF)) { // 세 면이 다 막힌 경우
+  if ((left_sonar >= 0) && (left_sonar <= WALL_GAP_DISTANCE_HALF) && (right_sonar >= 0) && (right_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= 0) && (front_sonar <= 100)) { // 세 면이 다 막힌 경우
     maze_status = 4;
     Serial.println("maze_status = 4");
   }
-  else if ((left_sonar >= 0) && (left_sonar <= WALL_GAP_DISTANCE_HALF) && (right_sonar >= 0) && (right_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= WALL_GAP_DISTANCE_HALF)) {
+  else if ((left_sonar >= 0) && (left_sonar <= WALL_GAP_DISTANCE_HALF) && (right_sonar >= 0) && (right_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= 100)) {
     maze_status = 1;
     Serial.println("maze_status = 1");
   }
-  else if ((left_sonar >= 0) && (left_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= 0) && (front_sonar <= WALL_GAP_DISTANCE_HALF)) {
+  else if ((left_sonar >= 0) && (left_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= 0) && (front_sonar <= 100)) {
     maze_status = 2;
     Serial.println("maze_status = 2");
   }
-  else if ((right_sonar >= 0) && (right_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= 0) && (front_sonar <= WALL_GAP_DISTANCE_HALF)) {
+  else if ((right_sonar >= 0) && (right_sonar <= WALL_GAP_DISTANCE_HALF) && (front_sonar >= 0) && (front_sonar <= 100)) {
     maze_status = 3;
     Serial.println("maze_status = 3");
   }
@@ -110,19 +110,21 @@ void check_maze_status(void) {
 
 void wall_collision_avoid (int base_speed) {
   float error = 0.0;    // 스티어 민감도 함수 초기화
-  float Kp = 0.3;       // 모터 속도 민감도
+  float error_old = 0.0;
+  float Kp = 0.28;       // 모터 속도 민감도
   
   int pwm_control = 0;  // PWM 제어 초기화
   int right_pwm = 0;    // 오른쪽 모터 속도 초기화
   int left_pwm = 0;     // 왼쪽 모터 속도 초기화
     
   error = (right_sonar - left_sonar); // 벽면 간의 거리
+  error += (error - error_old);
   error = Kp * error;   // 스티어 양 조절 
 
-  if (error >= 40) error = 40;  // 과도한 스티어링 방지
-  if (error <= -40) error = -40;
+  if (error >= 30) error = 30;  // 과도한 스티어링 방지
+  if (error <= -30) error = -30;
   
-  right_pwm = MOTOR_SPEED - error;  // 오른쪽 바퀴 회전수 조절
+  right_pwm = MOTOR_SPEED - (error + 5);  // 오른쪽 바퀴 회전수 조절
   left_pwm = MOTOR_SPEED + error;   // 왼쪽 바퀴 회전수 조절
   
   if (right_pwm <= 0) right_pwm = 0;
@@ -133,6 +135,7 @@ void wall_collision_avoid (int base_speed) {
   
   motor_A_control(HIGH, right_pwm);
   motor_B_control(HIGH, left_pwm);
+  error_old = error;
 }
 
 void loop() {
