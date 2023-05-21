@@ -23,9 +23,9 @@ void Excersize_2_9(int solution, int answer){
 	printf("\n\n");
 	printf("2-9 \n");
 	printf("독일에서 생산된 쿠페 승용차의 제로백이 %4.1lf s라고 한다.\n", zero_back1);
-	printf("(멈춘 상태에서 출발하여 속도가 % 6.2lf km / h에 도달하는 데 걸리는 시간)\n\n", velocity);
+	printf("(멈춘 상태에서 출발하여 속도가 % 6.2lf km/h에 도달하는 데 걸리는 시간)\n\n", velocity);
 	printf("(a) 이 자동차의 가속도는 몇 m/s^2인가?\n\n");
-	printf("(b) 어느 전기자동차의 제로백이 %4.1lf s라면 이때 가속도는 몇 m/s^2인가?\n\n", zero_back2);
+	printf("(b) 어느 전기 자동차의 제로백이 %4.1lf s라면 이때 가속도는 몇 m/s^2인가?\n\n", zero_back2);
 	if (solution == SHOW)
 	{
 		printf("\n\n");
@@ -49,7 +49,7 @@ void Excersize_2_9(int solution, int answer){
 	if (solution == SHOW)
 	{
 		printf("=========================   풀 이   =============================\n\n");
-		printf("(b) 어느 전기자동차의 제로백이 %6.2lf s라면 이때 가속도는 몇 m/s^2인가?\n\n", zero_back2);
+		printf("(b) 어느 전기 자동차의 제로백이 %6.2lf s라면 이때 가속도는 몇 m/s^2인가?\n\n", zero_back2);
 		printf("관련 공식은 a = Δv / Δt 입니다.\n\n");
 		printf("Δv:나중속도, Δt:시간, a:가속도 \n");
 
@@ -98,13 +98,14 @@ void Excersize_2_19(int solution, int answer)
 		printf("관련 공식: x = x0 + v0 * t + 1/2 * a * t^2 \n");
 		printf("x:나중위치, x0:초기위치, v0:초기속도, t:시간, a:가속도 \n");
 		printf("과속 운전자가 t초간 달린 거리:x1, 경찰차가 t초간 달린 거리:x2\n\n");
+
 		printf("혼합된 단위를 m/s로 변환\n");
 		printf("a = %.2lf km/h/s = %.2lf km/h/s / (1000m / 1km * 1h / 3600s)= %.2lf m/s^2\n\n", acceleration, acceleration, converted_acceleration);
 
 		printf("x1 = v0t + 1/2 * a * t^2 = (%.2lf m/s)t + 0 * t^2\n", velocity / 3.6);
 		printf("x2 = x0 + v0t + 1/2 * a * t^2 = 0 m + 0 m/s * t + 1/2 * %.2lf * t^2 m\n\n", velocity / 3.6);
 
-		printf("x1 = x2 = (%.2lf m/s)t = 1/2 * %.2lf m/s^2 * t^2\n", (velocity / 3.6), converted_acceleration, (acceleration / 3.6));
+		printf("x1 = x2 = (%.2lf m/s)t = 1/2 * %.2lf m/s^2 * t^2\n", (velocity / 3.6), converted_acceleration);
 		printf("%.2lft^2 - %.2lft = 0\n", (acceleration / 3.6) / 2, velocity / 3.6);
 		printf("t1 = %.2lf s, t2 = %.2lf s\n\n", (-b + e) / (2.0 * a), (-b - e) / (2.0 * a));
 	}
