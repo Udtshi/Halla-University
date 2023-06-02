@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define _USE_MATH_DEFINES     // M_PI¸¦ »ç¿ëÇÏ±â À§ÇØ¼­ Ãß°¡
+#define _USE_MATH_DEFINES     // M_PIë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œ ì¶”ê°€
 #include <math.h>
 #include <time.h>
 
@@ -16,7 +16,7 @@
 void Excersize_3_14(int solution, int answer){
 	srand(unsigned(time(NULL)));
 
-	double x_velocity = 10.0 + rand() % (5 + 1) - 3;
+	double x_velocity = 10.0 + rand() % (3 + 1) - 2;
 	double height_i = 50.0 + rand() % (10 + 1) - 5;
 	double gravity_accel = 9.80;
 	double distance = 20.0 + rand() % (5 + 1) - 3;
@@ -25,35 +25,46 @@ void Excersize_3_14(int solution, int answer){
 	
 	printf("\n\n");
 	printf("3-14 \n");
-	printf("Áö¸éÀ¸·ÎºÎÅÍ %6.2lf mÀÇ ³ôÀÌ¿¡¼­ µÎ °ø A, B°¡ ¼­·Î %6.2lf m¸¸Å­\n", height_i, distance);
-	printf("¶³¾îÁ® ÀÖ´Ù. °ø A¸¦ %6.2lf m/sÀÇ ¼Ó·ÂÀ¸·Î ¼öÆò¹æÇâÀ¸·Î ´øÁü°ú µ¿½Ã¿¡,\n", x_velocity);
-	printf("°ø B¸¦ ÀÚÀ¯³«ÇÏ ½ÃÅ²´Ù¸é µÎ °øÀÌ ¸¸³ª´Â °÷ÀÇ ³ôÀÌ´Â Áö¸éÀ¸·ÎºÎÅÍ ¾ó¸¶ÀÎ°¡?\n\n");
+	printf("ì§€ë©´ìœ¼ë¡œë¶€í„° %6.2lf mì˜ ë†’ì´ì—ì„œ ë‘ ê³µ A, Bê°€ ì„œë¡œ %6.2lf më§Œí¼\n", height_i, distance);
+	printf("ë–¨ì–´ì ¸ ìˆë‹¤. ê³µ Aë¥¼ %6.2lf m/sì˜ ì†ë ¥ìœ¼ë¡œ ìˆ˜í‰ë°©í–¥ìœ¼ë¡œ ë˜ì§ê³¼ ë™ì‹œì—,\n", x_velocity);
+	printf("ê³µ Bë¥¼ ììœ ë‚™í•˜ ì‹œí‚¨ë‹¤ë©´ ë‘ ê³µì´ ë§Œë‚˜ëŠ” ê³³ì˜ ë†’ì´ëŠ” ì§€ë©´ìœ¼ë¡œë¶€í„° ì–¼ë§ˆì¸ê°€?\n\n");
 
 	if (solution == SHOW)
 	{
 		printf("\n\n\n");
-		printf("=========================    Ç® ÀÌ   ============================\n\n");
-		printf("µÎ °øÀÌ ¸¸³ª´Â °÷ÀÇ ³ôÀÌ´Â Áö¸éÀ¸·ÎºÎÅÍ ¾ó¸¶ÀÎ°¡?\n\n");
-		printf("¥Äx: ÀÌµ¿°Å¸®, v0x: xÃà¹æÇâ Ã³À½¼Óµµ, t: ½Ã°£,\n\n");
-		printf("°ü·Ã °ø½ÄÀº ¥Äx = v0x * t ÀÔ´Ï´Ù.\n");
-		printf("¥Äx = v0x * t\n");
-		printf("%6.2lf m = %6.2lf m/s * t\n\n", distance, x_velocity);
-
-		printf("t = %6.2lfs\n\n", height_f_time);
-
-		printf("y: ³ªÁß³ôÀÌ, y0: Ã³À½³ôÀÌ, v0y: yÃà¹æÇâ Ã³À½¼Óµµ, t: ½Ã°£, a: Áß·Â°¡¼Óµµ\n\n");
-		printf("°ü·Ã °ø½ÄÀº y = y0 + v0y * t + 1/2 * a * t^2 ÀÔ´Ï´Ù.\n");
-		printf("Áß·Â °¡¼Óµµ´Â ¾Æ·¡ ¹æÇâÀÌ¹Ç·Î %6.2lf m/s^2ÀÔ´Ï´Ù.\n", -gravity_accel);
-		printf("y = y0 + v0y * t + 1/2 * a * t^2\n");
-		printf("  = %6.2lf m + 0 + 1/2 * %6.2lf m/s^2 * t^2\n", height_i, -gravity_accel);
-		printf("  = %6.2lf m\n\n", height_f);
+		printf("=========================   í’€ ì´   =============================\n\n");
+		printf("(a) ê³µì´ ì§€ë©´ì— ë–¨ì–´ì§ˆ ë•Œê¹Œì§€ ê±¸ë¦¬ëŠ” ì‹œê°„ì€ ì–¼ë§ˆì¸ê°€?\n\n");
+		printf("ê´€ë ¨ ê³µì‹ì€ Î”x = v0x * t ì…ë‹ˆë‹¤.\n");
+		printf("Î”x: ì´ë™ê±°ë¦¬, v0x: ìˆ˜í‰ë°©í–¥ ì²˜ìŒì†ë„, t: ì‹œê°„\n\n");
+		printf("Î”x = v0x * t\n");
+		printf("t  = Î”x / v0x\n");
+		printf("   = %6.2lf m / %6.2lf m/s\n", distance, x_velocity);
+		printf("   = %6.2lf s\n\n", height_f_time);
 	}
 
 	if (answer == SHOW)
 	{
-		printf("=========================   Á¤ ´ä   =============================\n\n");
-		printf("t = %6.2lf s\n", height_f_time);
-		printf("y = %6.2lf m\n\n", height_f);
+		printf("=========================   ì • ë‹µ   =============================\n\n");
+		printf("t  = %6.2lf s", height_f_time);
+	}
+
+	if (solution == SHOW)
+	{
+		printf("\n\n");
+		printf("=========================   í’€ ì´   =============================\n\n");
+		printf("(b) ë‘ ê³µì´ ë§Œë‚˜ëŠ” ê³³ì˜ ë†’ì´ëŠ” ì§€ë©´ìœ¼ë¡œë¶€í„° ì–¼ë§ˆì¸ê°€?\n\n");
+		printf("ê´€ë ¨ ê³µì‹ì€ y = y0 + v0y * t + 1/2 * a * t^2 ì…ë‹ˆë‹¤.\n");
+		printf("y: ë‚˜ì¤‘ë†’ì´, y0: ì²˜ìŒë†’ì´, v0y: ìˆ˜ì§ë°©í–¥ ì²˜ìŒì†ë„, t: ì‹œê°„, a: ì¤‘ë ¥ê°€ì†ë„\n\n");
+		printf("ì¤‘ë ¥ ê°€ì†ë„ëŠ” ì•„ë˜ ë°©í–¥ì´ë¯€ë¡œ %6.2lf m/s^2ì…ë‹ˆë‹¤.\n\n", -gravity_accel);
+		printf("y  = y0 + v0y * t + 1/2 * a * t^2\n");
+		printf("   = %6.2lf m + 0 + 1/2 * (%6.2lf m/s^2) * t^2\n", height_i, -gravity_accel);
+		printf("   = %6.2lf m\n\n", height_f);
+	}
+
+	if (answer == SHOW)
+	{
+		printf("=========================   ì • ë‹µ   =============================\n\n");
+		printf("y  = %6.2lf m\n\n", height_f);
 		printf("=================================================================\n");
 		printf("\n\n\n");
 	}
