@@ -507,4 +507,5 @@ void loop() {
     rotate(170);
   */
   read_line_sensor();
+  line_following(read_line_sensor());
 }
