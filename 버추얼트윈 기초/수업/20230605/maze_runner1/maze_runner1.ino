@@ -75,12 +75,12 @@ int read_line_sensor(void) {
 void line_following(int line_index){
   switch(line_index){
     case -4:  // 
-        motor_L_control(0);
+        motor_L_control(-20);
         motor_R_control(100);
         break;
 
     case -3:  // 왼쪽으로 회전
-        motor_L_control(30);
+        motor_L_control(0);
         motor_R_control(100);
         break;
 
@@ -111,12 +111,12 @@ void line_following(int line_index){
         
     case 3:
         motor_L_control(100);
-        motor_R_control(20);
+        motor_R_control(0);
         break;
         
     case 4:
         motor_L_control(100);
-        motor_R_control(0);
+        motor_R_control(-40);
         break;
 
     case -10: // 라인 끊겼을 때
@@ -124,10 +124,6 @@ void line_following(int line_index){
         motor_R_control(0);
         break;
 
-    default:
-        motor_L_control(60);
-        motor_R_control(100);
-        break;
   }
 }
 
@@ -159,23 +155,24 @@ void obstacle_avoidance(void){
   int target_heading_angle;
 
   read_imu_sensor();
-  target_heading_angle += 170;
+  target_heading_angle -= 80;
   imu_rotation();
   delay(100);
-  motor_L_control(80);
-  motor_R_control(80);
+  motor_L_control(90);
+  motor_R_control(90);
   delay(500);
 
   while(flag){
     line_index = read_line_sensor();
     if(line_index != 10){
       //stop
+      delay(100);
       motor_L_control(0);
       motor_R_control(0);
       delay(100);
 
       read_imu_sensor();
-      target_heading_angle -= 100;
+      target_heading_angle -= 40;
       imu_rotation();
       delay(100);
 
@@ -256,6 +253,7 @@ float front_sonar, left_sonar, right_sonar = 0.0;
 ////////////////////// Maze Status ////////////////////
 int maze_status = 0;
 
+#include <SoftwareSerial.h>
 
 void setup() {
   int i;
@@ -272,8 +270,9 @@ void setup() {
     pinMode(line_sensor_pin[i], INPUT); // Line Sensor 값 배열 선언
   }
 
-  Serial.begin(115200); // 통신 속도를 115200으로 정의
-  
+  Serial.begin(9600); // 통신 속도를 115200으로 정의
+  Serial1.begin(9600);   
+   
   Wire.begin();                   // I2C 통신 초기화(시작)
   mpu6050.begin();                // mpu6050 초기화(시작)
   mpu6050.calcGyroOffsets(true);  // 자이로 오프셋 초기화(시작)
@@ -406,12 +405,12 @@ void imu_rotation(void) {
     read_imu_sensor();
 
     if (heading_angle_error > THRESHOLD_ANGLE1) { // 반시계 방향으로 회전
-      motor_L_control(150);
-      motor_R_control(-150);
+      motor_L_control(-150);
+      motor_R_control(150);
     }
     else if ((heading_angle_error >= THRESHOLD_ANGLE2) && (heading_angle_error <= THRESHOLD_ANGLE1)) { // 정지
-      motor_L_control(100);
-      motor_R_control(-100);
+      motor_L_control(-100);
+      motor_R_control(100);
     }
     else if ((heading_angle_error > -THRESHOLD_ANGLE2) && (heading_angle_error < THRESHOLD_ANGLE2)) { // 정지
       motor_L_control(0);
@@ -419,12 +418,12 @@ void imu_rotation(void) {
       flag = 0;
     }
     else if ((heading_angle_error >= -THRESHOLD_ANGLE1) && (heading_angle_error <= -THRESHOLD_ANGLE2)) { // 정지
-      motor_L_control(-100);
-      motor_R_control(100);
+      motor_L_control(100);
+      motor_R_control(-100);
     }
     else { // heading_angle_error < -THRESHOLD_ANGLE1 // 시계방향으로 회전
-      motor_L_control(-150);
-      motor_R_control(150);
+      motor_L_control(150);
+      motor_R_control(-150);
     }
 
     Serial.print("Heading Angle Error : ");
@@ -469,9 +468,9 @@ void read_imu_sensor(void) {
 
   heading_angle = (heading1 + heading2 + heading3) / 3;
 
-  heading_angle = 360 - heading_angle;  // 회전 좌표계를 반시계 방향으로 전환
+ // heading_angle = 360 - heading_angle;  // 회전 좌표계를 반시계 방향으로 전환
 
-  while (heading_angle > 360) {
+  while (heading_angle >= 360) {
     heading_angle -= 360;
   }
 
@@ -572,7 +571,7 @@ void rotate(int angle) {
   }
 }
 
-void loop1() {
+void loop2() {
   /*
     read_sonar_sensor();
     read_imu_sensor();
@@ -582,8 +581,18 @@ void loop1() {
   */
   read_line_sensor();
   line_following(read_line_sensor());
-
-
+}
+void loop1() {
+  read_imu_sensor();
+  target_heading_angle -= 90;
+  imu_rotation();
+  delay(2000);
+}
+void loop3() {
+  read_imu_sensor();
+  Serial1.println(heading_angle);
+  Serial1.write("1");
+  delay(1000);
 }
 
 void loop(){
@@ -594,8 +603,9 @@ void loop(){
   mission_flag[0] = 0;
 
   if(mission_flag[0] == 0){ // line tracing
+    line_following(line_index);
     read_sonar_sensor();
-    if(front_sonar < 150){
+    if(front_sonar < 160){
       mission_flag[0] = 1;
       mission_flag[1] = 0;
     }
@@ -603,7 +613,7 @@ void loop(){
       mission_flag[2] = 0;
     }
     else{
-      line_following(line_index);
+      
     }
   } 
   if(mission_flag[1]==0)  // wall collision avoidance
