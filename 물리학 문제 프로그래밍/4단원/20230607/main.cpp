@@ -50,7 +50,7 @@ void Excersize_4_15(int solution, int answer){
 	{
 		printf("\n\n");
 		printf("=========================   풀 이   =============================\n\n");
-		printf("(b) 두 공이 만나는 곳의 높이는 지면으로부터 얼마인가?\n\n");
+		printf("(b) 운동마찰력은 얼마인가?\n\n");
 		printf("관련 공식은 Ff = μk * m * g 입니다.\n");
 		printf("Ff:마찰력, μk: 정지 마찰계수, m:질량, g:중력 가속도\n\n");
 		printf("Ff = μk * m * g\n");
