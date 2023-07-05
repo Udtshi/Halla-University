@@ -23,7 +23,9 @@ int main(void) {
     int a;
     scanf("%s %d", &s1, &a);
     for (int i = 0; i < a; i++){
-        printf("%s", s1);
+        if ((a >= 1) && (a <= 5)){
+            printf("%s", s1);
+        }
     }
     return 0;
 }
