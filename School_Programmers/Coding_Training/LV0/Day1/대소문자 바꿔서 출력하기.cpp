@@ -18,7 +18,7 @@ AbCdEfG
 #define LEN_INPUT 20
 
 int main(void) {
-    char s1[LEN_INPUT]; // 0~19 > 1~20
+    char s1[LEN_INPUT + 1]; // 0~19 > 1~20
     scanf("%s", &s1);
     for (int i = 0; i < LEN_INPUT; i++){
         if ((s1[i] >= 'a') && (s1[i] <= 'z')){
