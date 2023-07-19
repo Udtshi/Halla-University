@@ -61,10 +61,11 @@ void loop()
   {
     mpu6050.update();
     angle = mpu6050.getAngleZ();
-    Serial.print("Angle = "); Serial.println(mpu6050.getAngleZ());
-    Serial.print("Pulse counter: "); Serial.println(counter);
-    Serial.print("m: "); Serial.println((counter * pulse2m));
+
     previousMillis = currentMillis;
   }
+  Serial.print("Heading_Angle = "); Serial.println(mpu6050.getAngleZ());
+  Serial.print("Pulse_counter: "); Serial.println(counter);
+  Serial.print("Wheel_trick: "); Serial.println((counter * pulse2m));
 
 }
