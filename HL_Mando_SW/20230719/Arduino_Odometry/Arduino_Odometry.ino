@@ -3,7 +3,6 @@
 
 #define EncoderAPin 2
 #define EncoderBPin 3
-#define pulse 9
 #define pulse2m 0.000488
 
 const unsigned long width = 100; // 100 ms (10 Hz)
@@ -12,12 +11,18 @@ volatile int counter = 0;
 volatile int encoderB;
 
 double angle = 0.0;
+double angle_old = 0.0;
+double angle_diff = angle - angle_old;
+
+double distance = 0.0;
 
 unsigned long enc_time;
 unsigned long enc_time_old;
 unsigned long enc_time_diff;
 
 unsigned long previousMillis = 0;
+
+bool flag = 0;
 
 //pulse:410
 
@@ -49,8 +54,10 @@ void setup()
   pinMode(EncoderAPin, INPUT_PULLUP);
   pinMode(EncoderBPin, INPUT_PULLUP);
 
+  mpu6050.update();
+  angle_old = mpu6050.getAngleZ();
+    
   attachInterrupt(digitalPinToInterrupt(EncoderAPin), Encoder, RISING);
-
 }
 
 void loop()
@@ -61,11 +68,15 @@ void loop()
   {
     mpu6050.update();
     angle = mpu6050.getAngleZ();
+    angle_diff = angle - angle_old;
 
+    distance = (counter * pulse2m) / angle_diff;                  // 호의 길이
+    
     previousMillis = currentMillis;
   }
-  Serial.print("Heading_Angle = "); Serial.println(mpu6050.getAngleZ());
+  Serial.print("Heading_Angle = "); Serial.println(angle);
+  Serial.print("Delta_Angle = "); Serial.println(angle_diff);
   Serial.print("Pulse_counter: "); Serial.println(counter);
-  Serial.print("Wheel_trick: "); Serial.println((counter * pulse2m));
-
+  Serial.print("Wheel_tick: "); Serial.println((counter * pulse2m));
+  Serial.print("Distance: "); Serial.println(distance);
 }
