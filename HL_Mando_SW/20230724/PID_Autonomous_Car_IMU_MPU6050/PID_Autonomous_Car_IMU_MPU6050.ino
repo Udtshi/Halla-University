@@ -127,7 +127,7 @@ void imu_rotation(void) {
       motor_L_control(Output);
       motor_R_control(-Output);
     }
-    else if ((heading_angle_error >= THRESHOLD_ANGLE2) && (heading_angle_error <= THRESHOLD_ANGLE1)) { // 정지
+    else if ((heading_angle_error >= THRESHOLD_ANGLE2) && (heading_angle_error <= THRESHOLD_ANGLE1)) {
       motor_L_control(Output);
       motor_R_control(-Output);
     }
@@ -141,11 +141,11 @@ void imu_rotation(void) {
       
       flag = 0;
     }
-    else if ((heading_angle_error >= -THRESHOLD_ANGLE1) && (heading_angle_error <= -THRESHOLD_ANGLE2)) { // 정지
+    else if ((heading_angle_error >= -THRESHOLD_ANGLE1) && (heading_angle_error <= -THRESHOLD_ANGLE2)) {
       motor_L_control(Output);
       motor_R_control(-Output);
     }
-    else                                        // heading_angle_error < -THRESHOLD_ANGLE1 // 시계방향으로 회전
+    else                                                                                             // heading_angle_error < -THRESHOLD_ANGLE1 
     { 
       motor_L_control(Output);
       motor_R_control(-Output);
