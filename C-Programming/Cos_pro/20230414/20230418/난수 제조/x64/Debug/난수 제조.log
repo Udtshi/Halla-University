@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\202315019_JunHyeokCHOI\Cos_pro\20230418\난수 제조\main.cpp(8,13): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+C:\202315019_JunHyeokCHOI\Cos_pro\20230418\난수 제조\main.cpp(13,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  난수 제조.vcxproj -> C:\202315019_JunHyeokCHOI\Cos_pro\20230418\난수 제조\x64\Debug\난수 제조.exe

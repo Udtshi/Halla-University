@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\chlwn\source\repos\20230414_11\main.cpp(6,9): warning C4309: '=': 상수 값이 잘립니다.
+C:\Users\chlwn\source\repos\20230414_11\main.cpp(8,11): warning C4309: '=': 상수 값이 잘립니다.
+  20230414_11.vcxproj -> C:\Users\chlwn\source\repos\20230414_11\x64\Debug\20230414_11.exe
